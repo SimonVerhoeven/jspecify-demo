@@ -1,0 +1,4 @@
+= JSpecify
+
+This lbirary geared towards improving static analysis and language interpretation recently released its 1.0 version.
+
