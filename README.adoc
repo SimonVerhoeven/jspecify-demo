@@ -1,4 +1,45 @@
-= JSpecify
+= JSpecify 1.0.0: Standardizing Nullability in the JVM Ecosystem
 
-This lbirary geared towards improving static analysis and language interpretation recently released its 1.0 version.
+This library geared towards better handling of Nullability by implementing the Nulness specification recently released version 1.0.
 
+NullPointerExceptions have long been the bane of a developer's existence, and have also been called `The Billion Dollar Mistake` by the creator Tony Hoare. You may run into unexpected behaviour due to poor handling of null values, and as a developer it certainly adds cognitive load when you have to track whether a value can or may be null.
+
+While various solutions exist, including language-specific approaches like Kotlin's null safety, we haven't had a properly unified approach yet given https://jcp.org/en/jsr/detail?id=305[JSR-305] did not get enough traction.
+The aim of JSpecify is to address this through a set of annotations with proper tooling integration.
+
+JSpecify itself is backed by some mayor players in the industry such as JetBrains, Google, and Spring.
+The latter recently even fully migrated to it for its upcoming 7.0 release, this was handled through https://github.com/spring-projects/spring-framework/issues/28797#issuecomment-2387137015[issue-28797].
+
+== Annotation System
+
+JSpecify 1.0.0 introduces four annotations:
+
+- `@Nullable`: Indicates a type usage that can be null
+- `@NonNull`: Explicitly marks a type usage that cannot be null
+- `@NullMarked`: Applies null awareness broadly to modules, packages, or types
+- `@NullUnmarked`: Opts out of null awareness for specific scopes
+
+A common use case is to add `@NullMarked` to module, package, or type declarations that require nullability information. This lets uw know that any unannotated type usages are not nullable by default. We can then explicitly mark exceptional cases with `@Nullable`. This approach serves as a sensible default, reducing annotation overhead while maintaining clarity about nullability intentions.
+
+The annotations work with static analysis tools to catch potential null-related issues during build time. Different projects can implement varying levels of strictness in their nullability checking, allowing us to balance thoroughness against practical considerations like migration effort and false positive handling.
+
+== Practical Benefits and Adoption
+
+JSpecify offers us several advantages:
+
+- Guaranteed backward compatibility at source level
+- Consistent null-checking behavior across tools and frameworks
+- Improved language interoperability, especially for Java-Kotlin interaction
+- Build-time safety through static analysis
+
+== Future Impact
+
+While currently focused on these core nullability annotations, JSpecify provides a foundation for improved null safety in the JVM ecosystem. As tool and framework support grows, we can expect better static analysis capabilities and fewer runtime null-related errors, particularly beneficial for projects using Java 17 and newer versions.
+
+== Extra resources:
+
+I recommend checking out these resources as well:
+
+- https://jspecify.dev/docs/start-here/[Getting started with JSpecify]
+- https://jspecify.dev/docs/spec/[Nullness Specification]
+- https://www.moderne.ai/blog/mass-migration-of-nullability-annotations-to-jspecify[How Moderne mass migrated from JSR-305 meta annotations to JSpecify]
