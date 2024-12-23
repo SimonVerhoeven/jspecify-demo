@@ -2,7 +2,7 @@
 
 This library geared towards better handling of Nullability by implementing the Nulness specification recently released version 1.0.
 
-NullPointerExceptions have long been the bane of a developer's existence, and have also been called https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/[The Billion Dollar Mistake] by the creator Tony Hoare. You may run into unexpected behaviour due to poor handling of null values, and as a developer it certainly adds cognitive load when you have to track whether a value can or may be null.
+NullPointerExceptions have long been the bane of a developer's existence, and have also been called https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/[The Billion-Dollar Mistake] by the creator Tony Hoare. You may run into unexpected behaviour due to poor handling of null values, and as a developer it certainly adds cognitive load when you have to track whether a value can or may be null.
 
 While various solutions exist, including language-specific approaches like Kotlin's null safety, we haven't had a properly unified approach yet given https://jcp.org/en/jsr/detail?id=305[JSR-305] did not get enough traction.
 The aim of JSpecify is to address this through a set of annotations with proper tooling integration.
@@ -55,13 +55,17 @@ For example:
 
 [source,java]
 ----
-// Array of nullable texts
-private String @Nullable[] arrayOfNullableTexts = new String[5];
+// Array of nullable Strings
+private final String[] arrayOfNullableTexts;
 // Nullable array
-private @Nullable String[] nullableArray = null;
+private String @Nullable [] nullableArray = null;
+// Nullable array
+private @Nullable String @Nullable [] nullableArrayOfNullableStrings = null;
 ----
 
-So we need to keep in mind what we want to convey.
+So we need to keep in mind what we want to convey. It's what's directly to the right of the annotation that can be null.
+
+It is also important to keep in mind that these aren't applicable for local variables since it's inferrable.
 
 The annotations work with static analysis tools to catch potential null-related issues during build time. Different projects can implement varying levels of strictness in their nullability checking, allowing us to balance thoroughness against practical considerations like migration effort and false positive handling.
 
