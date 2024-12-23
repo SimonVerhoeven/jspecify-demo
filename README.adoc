@@ -19,6 +19,8 @@ JSpecify 1.0.0 introduces four annotations:
 - `@NullMarked`: Applies null awareness broadly to modules, packages, or types
 - `@NullUnmarked`: Opts out of null awareness for specific scopes
 
+So if we were to try and put a `Null` value in an array marked as `NonNull` we will get the helpfull message `'null' is stored to an array of @NotNull elements`.
+
 A common use case is to add `@NullMarked` to module, package, or type declarations that require nullability information. This lets uw know that any unannotated type usages are not nullable by default. We can then explicitly mark exceptional cases with `@Nullable`. This approach serves as a sensible default, reducing annotation overhead while maintaining clarity about nullability intentions.
 
 [source,java]

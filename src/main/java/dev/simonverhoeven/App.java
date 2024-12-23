@@ -11,7 +11,7 @@ public class App {
     // Nullable array
     private String @Nullable [] nullableArray = null;
     // Nullable array
-    private @Nullable String @Nullable [] nullableArrayOfNullableStrings = null;
+    private @NonNull String @Nullable [] nullableArrayOfNullableStrings = null;
 
     public App() {
         arrayOfNullableTexts = new String[]{null, "", null, null, null};
