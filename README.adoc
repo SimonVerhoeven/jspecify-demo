@@ -1,13 +1,13 @@
 = JSpecify 1.0.0: Standardizing Nullability in the JVM Ecosystem
 
-This library geared towards better handling of Nullability by implementing the Nulness specification recently released version 1.0.
+This library is geared towards better handling of nullability by implementing the Nullness specification recently released version 1.0.
 
-NullPointerExceptions have long been the bane of a developer's existence, and have also been called https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/[The Billion-Dollar Mistake] by the creator Tony Hoare. You may run into unexpected behaviour due to poor handling of null values, and as a developer it certainly adds cognitive load when you have to track whether a value can or may be null.
+NullPointerExceptions have long been the bane of a developer's existence and have also been called https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/[The Billion-Dollar Mistake] by the creator Tony Hoare. You may run into unexpected behaviour due to poor handling of null values, and as a developer it certainly adds a cognitive load when you have to track whether a value can or may be null.
 
 While various solutions exist, including language-specific approaches like Kotlin's null safety, we haven't had a properly unified approach yet given https://jcp.org/en/jsr/detail?id=305[JSR-305] did not get enough traction.
 The aim of JSpecify is to address this through a set of annotations with proper tooling integration.
 
-JSpecify itself is backed by some mayor players in the industry such as JetBrains, Google, and Spring.
+JSpecify itself is backed by some major players in the industry such as JetBrains, Google, and Spring.
 The latter recently even fully migrated to it for its upcoming 7.0 release, this was handled through https://github.com/spring-projects/spring-framework/issues/28797#issuecomment-2387137015[issue-28797].
 
 == Annotation System
@@ -19,9 +19,9 @@ JSpecify 1.0.0 introduces four annotations:
 - `@NullMarked`: Applies null awareness broadly to modules, packages, or types
 - `@NullUnmarked`: Opts out of null awareness for specific scopes
 
-So if we were to try and put a `Null` value in an array marked as `NonNull` we will get the helpfull message `'null' is stored to an array of @NotNull elements`.
+So if we were to try and put a `Null` value in an array marked as `NonNull` we will get the helpful message `'null' is stored to an array of @NotNull elements`.
 
-A common use case is to add `@NullMarked` to module, package, or type declarations that require nullability information. This lets uw know that any unannotated type usages are not nullable by default. We can then explicitly mark exceptional cases with `@Nullable`. This approach serves as a sensible default, reducing annotation overhead while maintaining clarity about nullability intentions.
+A common use case is to add `@NullMarked` to module, package, or type declarations that require nullability information. This lets us know that any unannotated type usages are not nullable by default. We can then explicitly mark exceptional cases with `@Nullable`. This approach serves as a sensible default, reducing annotation overhead while maintaining clarity about nullability intentions.
 
 [source,java]
 ----
@@ -52,7 +52,7 @@ public class NotAssumedNullSafe {
 
 ----
 
-One important thing to keep in mind how you apply the annotations.
+One important thing to keep in mind is how you apply the annotations.
 For example:
 
 [source,java]
@@ -67,7 +67,7 @@ private @Nullable String @Nullable [] nullableArrayOfNullableStrings = null;
 
 So we need to keep in mind what we want to convey. It's what's directly to the right of the annotation that can be null.
 
-It is also important to keep in mind that these aren't applicable for local variables since it's inferrable.
+It is also important to keep in mind that these aren't applicable for local variables since it's inferable.
 
 The annotations work with static analysis tools to catch potential null-related issues during build time. Different projects can implement varying levels of strictness in their nullability checking, allowing us to balance thoroughness against practical considerations like migration effort and false positive handling.
 
@@ -86,7 +86,7 @@ While currently focused on these core nullability annotations, JSpecify provides
 
 == Extra resources:
 
-I recommend checking out these resources as well:
+Some useful resources to check out are:
 
 - https://jspecify.dev/docs/start-here/[Getting started with JSpecify]
 - https://jspecify.dev/docs/spec/[Nullness Specification]
